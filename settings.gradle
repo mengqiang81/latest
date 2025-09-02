@@ -1,1 +1,9 @@
 rootProject.name = 'latest'
+
+include 'client'
+include 'interface'
+include 'application'
+include 'application:api'
+include 'infrastructure'
+include 'domain'
+include 'starter'

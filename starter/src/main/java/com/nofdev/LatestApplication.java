@@ -1,4 +1,4 @@
-package com.nofdev.latest;
+package com.nofdev;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LatestApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LatestApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LatestApplication.class, args);
+    }
 
 }

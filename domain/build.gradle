@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.nofdev'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // ========分层架构依赖，不得随意修改========
+    // ========分层架构依赖结束========
+}
+
+test {
+    useJUnitPlatform()
+}
