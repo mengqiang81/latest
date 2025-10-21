@@ -1,0 +1,35 @@
+plugins {
+    id 'java-platform'
+}
+
+group = 'org.nofdev'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+// 全局版本变量
+ext {
+    versions = [
+            domainFoundation: '0.0.1-SNAPSHOT',
+            validationAPI  : '3.1.1',
+            lombok         : '1.18.42',
+            dapr           : '1.16.0',
+            mapstruct      : '1.6.3',
+            cloudEvents    : '4.0.1'
+    ]
+}
+
+dependencies {
+    constraints {
+        api "org.nofdev:domain-foundation:${versions.domainFoundation}"
+        api "jakarta.validation:jakarta.validation-api:${versions.validationAPI}"
+        api "org.projectlombok:lombok:${versions.lombok}"
+        api "io.dapr.spring:dapr-spring-boot-starter:${versions.dapr}"
+        api "org.mapstruct:mapstruct:${versions.mapstruct}"
+        api "org.mapstruct:mapstruct-processor:${versions.mapstruct}"
+        api "io.cloudevents:cloudevents-spring:${versions.cloudEvents}"
+    }
+}

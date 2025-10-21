@@ -1,0 +1,2 @@
+* 主要处理command逻辑，复杂的query逻辑可以去query模块处理
+* 在模块依赖上，application和query是不同的，query可以直接依赖infrastructure而application只能注入infrastructure的实现，application是一等公民

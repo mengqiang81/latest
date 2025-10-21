@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'org.nofdev'
+group = 'nofdev'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
@@ -14,7 +14,11 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // ========分层架构依赖，不得随意修改========
     implementation project(":domain")
+    implementation project(":application")
     // ========分层架构依赖结束========
+    implementation 'io.dapr.spring:dapr-spring-boot-starter'
+    implementation 'org.mapstruct:mapstruct'
+    annotationProcessor 'org.mapstruct:mapstruct-processor'
 }
 
 test {

@@ -1,0 +1,1 @@
+* 把query作为一个跟application平级的模块，而不是在application下分command和query两个模块，是因为CQRS不是DDD的核心概念，而是按需引入，DDD为主，CQRS为辐

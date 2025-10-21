@@ -1,13 +1,13 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.0.0-M2'
-    id 'io.spring.dependency-management' version '1.1.7'
-    id 'org.hibernate.orm' version '7.1.0.Final'
-    id 'org.graalvm.buildtools.native' version '0.11.0'
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'org.hibernate.orm'
+    id 'org.graalvm.buildtools.native'
+    id 'org.asciidoctor.jvm.convert'
 }
 
-group = 'org.nofdev'
+group = 'nofdev'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
@@ -47,7 +47,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // ========分层架构依赖，不得随意修改========
-    implementation project(":interface")
+    implementation project(":presentation")
     implementation project(":application")
     implementation project(":domain")
     implementation project(":infrastructure")

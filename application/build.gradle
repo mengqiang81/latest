@@ -6,6 +6,7 @@ group = 'org.nofdev'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -16,9 +17,8 @@ dependencies {
     // ========分层架构依赖，不得随意修改========
     implementation project(":application:api")
     implementation project(":domain")
-    implementation project(":infrastructure")
     // ========分层架构依赖结束========
-
+    implementation("org.nofdev:domain-foundation")
 }
 
 test {

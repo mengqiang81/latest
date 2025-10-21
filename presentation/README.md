@@ -1,0 +1,1 @@
+* 对应DDD中的User interface layer。这里用表现层语义更通用一些

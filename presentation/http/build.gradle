@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'org.nofdev'
+group = 'nofdev'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
@@ -12,9 +12,12 @@ repositories {
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.springframework:spring-web'
     // ========分层架构依赖，不得随意修改========
-    implementation project(":application")
+    implementation project(":application:api")
+    implementation project(":query:api")
     // ========分层架构依赖结束========
+    implementation("org.jspecify:jspecify")
 }
 
 test {
