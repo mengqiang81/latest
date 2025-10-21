@@ -42,7 +42,7 @@ allprojects {
 
 subprojects {
     // 排除路径为 ':core:common' 的子项目
-    if (!project.path.startsWith(":common:") && project.path != ":dependency-management") {
+    if (!project.path.startsWith(":common") && project.path != ":dependency-management") {
         // 让不需要引入spring-boot的子模块可以使用统一的spring组件版本管理，比如有的模块只需要引入spring-web，通过spring依赖管理插件，就可以根引入的spring-boot保持一致了
         // 要注意克制对spring的依赖，特别是domain层，更适合一些轻量级的工具包
         // 应用 Spring Boot 依赖管理插件

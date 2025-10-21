@@ -2,8 +2,11 @@ package org.nofdev.address;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Builder;
 import org.nofdev.core.ValueObject;
+
 import java.util.Locale;
+
 import static org.nofdev.address.AddressValidGroup.*;
 
 /**
@@ -19,6 +22,7 @@ import static org.nofdev.address.AddressValidGroup.*;
  * @param contactPerson      联系人
  * @param phoneNumber        联系电话
  */
+@Builder
 public record BasicAddress(
         @NotBlank(message = "{address.countryCode.notBlank}")
         String countryCode,
@@ -37,6 +41,13 @@ public record BasicAddress(
         String contactPerson,
         String phoneNumber
 ) implements ValueObject<BasicAddress> {
+
+    // 手动编写 Builder 内部类，为 countryCode 字段设置默认值
+    public static class BasicAddressBuilder {
+        private String countryCode = "CN";
+        private String extendedAddress = null;
+    }
+
     /**
      * 根据所在国家/地区的格式规则，返回格式化的地址字符串
      */

@@ -15,7 +15,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     // ========分层架构依赖，不得随意修改========
     // ========分层架构依赖结束========
-    implementation("org.nofdev:domain-foundation")
+    api("org.nofdev:domain-foundation")
     implementation("jakarta.validation:jakarta.validation-api")
 
     compileOnly("org.projectlombok:lombok")

@@ -18,7 +18,6 @@ dependencies {
     implementation project(":application:api")
     implementation project(":domain")
     // ========分层架构依赖结束========
-    implementation("org.nofdev:domain-foundation")
 }
 
 test {
