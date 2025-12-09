@@ -39,7 +39,8 @@
 * [ ] 虚拟化线程
 * [ ] ADT（vavr（不推荐） 或 sealed class + record）
 * [ ] DDD
-* [ ] 代码即文档（https://codewiki.google/）
+* [x] 代码即文档（https://codewiki.google/）
+  * https://deepwiki.com/mengqiang81/latest
 
 ## 分层架构
 ### 原则
