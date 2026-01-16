@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.nofdev.address.BasicAddress;
 import org.nofdev.common.BasicAggregateTrace;
 import org.nofdev.stereotype.AggregateRoot;
-import org.nofdev.stereotype.Tenantable;
+import org.nofdev.tenant.Tenantable;
 import org.nofdev.custom.FeatureInfo;
 import org.nofdev.custom.StaticTenantCustomInfo;
 import org.nofdev.customer.CustomerId;
@@ -23,7 +23,7 @@ import java.util.List;
 @Setter
 @Builder
 public class SalesOrder implements AggregateRoot<String>, Tenantable {
-    private String id;
+    private String id;// 销售单ID，聚合内唯一
     private String orderNo;// 销售单编号，租户内唯一
 
     private CustomerId orderingCustomerId; // 订货客户

@@ -1,5 +1,7 @@
 package org.nofdev.sales;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.nofdev.stereotype.AggregateRoot;
 
 import java.math.BigDecimal;
@@ -7,35 +9,13 @@ import java.math.BigDecimal;
 /**
  * 支付单
  */
+@Getter
+@Setter
 public class Payment implements AggregateRoot<String> {
 
     private String id;
     private BigDecimal amount;
     private PaymentStatus paymentStatus;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public PaymentStatus getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(PaymentStatus paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
 
     @Override
     public String getEntityId() {

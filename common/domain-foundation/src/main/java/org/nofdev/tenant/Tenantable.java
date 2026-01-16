@@ -1,6 +1,4 @@
-package org.nofdev.stereotype;
-
-import org.nofdev.tenant.TenantId;
+package org.nofdev.tenant;
 
 /**
  * 具备租户ID的领域对象
