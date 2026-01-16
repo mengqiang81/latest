@@ -1,3 +1,5 @@
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/mengqiang81/latest)
+
 # ERP系统最佳实践验证
 [新一代架构白皮书](https://www.yuque.com/chigui-fp7qz/kb/aci991egzg5xw016)的应用实现
 
