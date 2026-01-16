@@ -5,5 +5,5 @@ import org.nofdev.stereotype.ValueObject;
 /**
  * 探索领域实体元对象的建模方式
  */
-public record SalesOrderDefinition() implements ValueObject<SalesOrderDefinition> {
+public record SalesOrderDefinition() implements ValueObject {
 }
