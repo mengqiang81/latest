@@ -4,10 +4,10 @@ public interface InventoryService {
     /**
      * 锁定库存
      */
-    public void lockInventory();
+    void lockInventory();
 
     /**
      * 释放库存
      */
-    public void releaseInventory();
+    void releaseInventory();
 }

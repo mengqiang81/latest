@@ -45,10 +45,12 @@ public record BasicAddress(
      * 手动编写 Builder 内部类，为 countryCode 字段设置默认值
      * XXX，这是一个hacker，原理是在不设置lombok @Builder的builderClassName时，默认生成的builder类名为BasicAddressBuilder，通过这种方式设置默认值，解决在record中无法使用@Builder.Default的问题
      *
-     * @see https://github.com/projectlombok/lombok/issues/3547
+     * @see <a href="https://github.com/projectlombok/lombok/issues/3547">...</a>
      */
     public static class BasicAddressBuilder {
+        @SuppressWarnings("FieldMayBeFinal")
         private String countryCode = "CN";
+        @SuppressWarnings("FieldMayBeFinal")
         private String extendedAddress = null;
     }
 

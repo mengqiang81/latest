@@ -8,7 +8,7 @@ import org.springframework.modulith.Modulithic;
 @SpringBootApplication
 public class LatestApplication {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(LatestApplication.class, args);
     }
 

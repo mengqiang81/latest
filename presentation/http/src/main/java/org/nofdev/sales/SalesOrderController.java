@@ -6,7 +6,7 @@ import java.security.Principal;
 
 @RestController
 public class SalesOrderController {
-    private SalesOrderService salesOrderService;
+    private final SalesOrderService salesOrderService;
 
     public SalesOrderController(SalesOrderService salesOrderService) {
         this.salesOrderService = salesOrderService;

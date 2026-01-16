@@ -1,10 +1,13 @@
 package org.nofdev.sales;
 
+import lombok.Getter;
+
 /**
  * 订单状态枚举
  * 遵循状态流转规则：DRAFT -> SUBMITTED -> CONFIRMED -> SHIPPED -> DELIVERED
  * 或 DRAFT -> SUBMITTED -> CANCELLED
  */
+@Getter
 public enum OrderStatus {
     DRAFT("草稿", "订单创建但未提交"),
     SUBMITTED("已提交", "订单已提交但未确认"),
@@ -18,13 +21,5 @@ public enum OrderStatus {
     OrderStatus(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 }
