@@ -1,76 +1,69 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+// 插件版本在根项目管理
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '4.0.0-M2'
-	id 'io.spring.dependency-management' version '1.1.7'
-	id 'org.hibernate.orm' version '7.1.0.Final'
-	id 'org.graalvm.buildtools.native' version '0.11.0'
-	id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'java'
+    id 'org.springframework.boot' version '4.0.0' apply false
+    id 'io.spring.dependency-management' version '1.1.7' apply false
+    id 'org.hibernate.orm' version '7.1.0.Final' apply false
+    id 'org.graalvm.buildtools.native' version '0.11.3' apply false
+//    id 'org.asciidoctor.jvm.convert' version '3.3.2' apply false
+    id 'org.asciidoctor.jvm.convert' version '4.0.5' apply false
 }
 
-group = 'com.nofdev'
+group = 'org.nofdev'
 version = '0.0.1-SNAPSHOT'
 description = '这是一个验证最新技术栈的项目'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(24)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+    // 强制源码/字节码兼容版本为 25
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
 }
 
 repositories {
-	mavenCentral()
+    mavenLocal()
+    mavenCentral()
 }
 
-ext {
-	set('snippetsDir', file("build/generated-snippets"))
-	set('springModulithVersion', "2.0.0-M2")
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
 }
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-artemis'
-	implementation 'org.springframework.boot:spring-boot-starter-cache'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	implementation 'org.springframework.boot:spring-boot-starter-flyway'
-	implementation 'org.springframework.boot:spring-boot-starter-graphql'
-	implementation 'org.springframework.boot:spring-boot-starter-restclient'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-database-postgresql'
-	implementation 'org.springframework.modulith:spring-modulith-events-api'
-	implementation 'org.springframework.modulith:spring-modulith-starter-core'
-	implementation 'org.springframework.modulith:spring-modulith-starter-jpa'
-	runtimeOnly 'io.micrometer:micrometer-registry-otlp'
-	runtimeOnly 'org.postgresql:postgresql'
-	runtimeOnly 'org.springframework.modulith:spring-modulith-actuator'
-	runtimeOnly 'org.springframework.modulith:spring-modulith-events-jms'
-	runtimeOnly 'org.springframework.modulith:spring-modulith-observability'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.graphql:spring-graphql-test'
-	testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
-	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
+subprojects {
+    // 排除路径为 ':core:common' 的子项目
+    if (!project.path.startsWith(":common") && project.path != ":dependency-management") {
+        // 让不需要引入spring-boot的子模块可以使用统一的spring组件版本管理，比如有的模块只需要引入spring-web，通过spring依赖管理插件，就可以根引入的spring-boot保持一致了
+        // 要注意克制对spring的依赖，特别是domain层，更适合一些轻量级的工具包
+        // 应用 Spring Boot 依赖管理插件
+        apply plugin: 'io.spring.dependency-management'
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.modulith:spring-modulith-bom:${springModulithVersion}"
-	}
-}
+        dependencyManagement {
+            imports {
+                // 引入 Spring Boot 的依赖版本约定（与指定的 Spring Boot 版本匹配）
+                mavenBom SpringBootPlugin.BOM_COORDINATES
+            }
+        }
+        plugins.withId('java') { // 对应用了 java 插件的子模块生效
+            dependencies {
+                implementation platform(project(':dependency-management'))
+            }
+        }
+        plugins.withId('java-library') { // 对应用了 java-library 插件的子模块生效
+            dependencies {
+                implementation platform(project(':dependency-management'))
+            }
+        }
+    }
 
-hibernate {
-	enhancement {
-		enableAssociationManagement = true
-	}
-}
-
-tasks.named('test') {
-	outputs.dir snippetsDir
-	useJUnitPlatform()
-}
-
-tasks.named('asciidoctor') {
-	inputs.dir snippetsDir
-	dependsOn test
 }

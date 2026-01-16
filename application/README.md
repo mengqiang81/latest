@@ -1,0 +1,3 @@
+* 主要处理command逻辑，复杂的query逻辑可以去query模块处理
+* 在模块依赖上，application和query是不同的，query可以直接依赖infrastructure而application只能注入infrastructure的实现，application是一等公民
+* 注意，command不能单纯理解为写入，他包含了完成一个命令所必须的查询，为保障一致性，command中的查询不能被打到读库

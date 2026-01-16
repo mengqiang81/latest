@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group = 'nofdev'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // ========分层架构依赖，不得随意修改========
+    implementation project(":domain")
+    implementation project(":application")
+    // XXX query也依赖倒置，不知是否可行
+//    implementation project(":query")
+    // ========分层架构依赖结束========
+    implementation 'io.dapr.spring:dapr-spring-boot-starter'
+    implementation 'org.mapstruct:mapstruct'
+    annotationProcessor 'org.mapstruct:mapstruct-processor'
+}
+
+test {
+    useJUnitPlatform()
+}

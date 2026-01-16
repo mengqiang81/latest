@@ -1,0 +1,29 @@
+plugins {
+    id 'java-library'
+}
+
+group = 'org.nofdev'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // ========分层架构依赖，不得随意修改========
+    // ========分层架构依赖结束========
+    api("org.nofdev:domain-foundation")
+    implementation("jakarta.validation:jakarta.validation-api")
+
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+    testCompileOnly("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
+}
+
+test {
+    useJUnitPlatform()
+}
