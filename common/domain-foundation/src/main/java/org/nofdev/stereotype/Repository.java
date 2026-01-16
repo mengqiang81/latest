@@ -1,4 +1,4 @@
-package org.nofdev.core;
+package org.nofdev.stereotype;
 
 import java.util.List;
 import java.util.Optional;

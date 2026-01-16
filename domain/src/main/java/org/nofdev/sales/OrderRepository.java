@@ -1,6 +1,6 @@
 package org.nofdev.sales;
 
-import org.nofdev.core.Repository;
+import org.nofdev.stereotype.Repository;
 
 public interface OrderRepository extends Repository<SalesOrder, String> {
 }

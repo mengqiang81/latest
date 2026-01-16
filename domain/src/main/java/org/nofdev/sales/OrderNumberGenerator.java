@@ -1,6 +1,6 @@
 package org.nofdev.sales;
 
-import org.nofdev.core.DomainService;
+import org.nofdev.stereotype.DomainService;
 
 import java.util.UUID;
 

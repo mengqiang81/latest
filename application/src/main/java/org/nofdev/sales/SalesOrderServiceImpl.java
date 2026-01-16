@@ -1,21 +1,15 @@
 package org.nofdev.sales;
 
-import java.util.ArrayList;
-
 public class SalesOrderServiceImpl implements SalesOrderService {
-    private final SalesOrderDomainService orderDomainService;
+    private final OrderCreateCommandHandler orderCreateCommandHandler;
 
-    public SalesOrderServiceImpl(SalesOrderDomainService orderDomainService) {
-        this.orderDomainService = orderDomainService;
+    public SalesOrderServiceImpl(OrderCreateCommandHandler orderCreateCommandHandler) {
+        this.orderCreateCommandHandler = orderCreateCommandHandler;
     }
 
     @Override
-    public void create(OrderDTO orderDTO) {
-        OrderCreateCommand orderCreateCommand = convert(orderDTO);
-        orderDomainService.createOrder(orderCreateCommand);
-    }
-
-    private OrderCreateCommand convert(OrderDTO orderDTO) {
-        return new OrderCreateCommand(new ArrayList<>(),null,null);
+    public void create(OrderCreateCommand orderCreateCommand) {
+        // TODO，权限校验等
+        orderCreateCommandHandler.handle(orderCreateCommand);
     }
 }

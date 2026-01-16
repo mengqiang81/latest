@@ -1,4 +1,4 @@
-package org.nofdev.core;
+package org.nofdev.stereotype;
 
 /**
  * 领域层在跟外部交互时需要定义SPI，由应用层实现

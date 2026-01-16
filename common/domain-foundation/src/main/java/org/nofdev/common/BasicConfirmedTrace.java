@@ -2,7 +2,7 @@ package org.nofdev.common;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.nofdev.core.ValueObject;
+import org.nofdev.stereotype.ValueObject;
 
 import java.time.OffsetDateTime;
 

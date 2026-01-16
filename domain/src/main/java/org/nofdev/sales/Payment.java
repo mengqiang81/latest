@@ -1,6 +1,6 @@
 package org.nofdev.sales;
 
-import org.nofdev.core.AggregateRoot;
+import org.nofdev.stereotype.AggregateRoot;
 
 import java.math.BigDecimal;
 

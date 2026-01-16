@@ -3,7 +3,7 @@ package org.nofdev.address;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
-import org.nofdev.core.ValueObject;
+import org.nofdev.stereotype.ValueObject;
 
 import java.util.Locale;
 
@@ -24,25 +24,29 @@ import static org.nofdev.address.AddressValidGroup.*;
  */
 @Builder
 public record BasicAddress(
-        @NotBlank(message = "{address.countryCode.notBlank}")
+        @NotBlank
         String countryCode,
         @NotBlank(groups = {CN.class, US.class, JP.class}, message = "{address.area.notBlank}")
         String administrativeArea,
-        @NotBlank(groups = {CN.class, US.class, JP.class, DEFAULT.class}, message = "{address.city.notBlank}")
+        @NotBlank(groups = {CN.class, US.class, JP.class, DEFAULT.class})
         String city,
         String district,
         String streetAddress,
-        @NotBlank(groups = {CN.class, US.class, JP.class}, message = "{address.postalCode.notBlank}")
-        @Pattern(regexp = "\\d{6}", groups = {CN.class}, message = "{address.postalCode.Illegal}")
+        @NotBlank(groups = {CN.class, US.class, JP.class})
+        @Pattern(regexp = "\\d{6}", groups = {CN.class})
         @Pattern(regexp = "\\d{5}(-\\d{4})?", groups = {US.class})
         @Pattern(regexp = "\\d{3}-\\d{4}", groups = {JP.class})
         String postalCode,
         String extendedAddress,
         String contactPerson,
         String phoneNumber
-) implements ValueObject<BasicAddress> {
-
-    // 手动编写 Builder 内部类，为 countryCode 字段设置默认值
+) implements ValueObject {
+    /**
+     * 手动编写 Builder 内部类，为 countryCode 字段设置默认值
+     * XXX，这是一个hacker，原理是在不设置lombok @Builder的builderClassName时，默认生成的builder类名为BasicAddressBuilder，通过这种方式设置默认值，解决在record中无法使用@Builder.Default的问题
+     *
+     * @see https://github.com/projectlombok/lombok/issues/3547
+     */
     public static class BasicAddressBuilder {
         private String countryCode = "CN";
         private String extendedAddress = null;

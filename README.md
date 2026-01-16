@@ -39,8 +39,16 @@
 * [ ] 虚拟化线程
 * [ ] ADT（vavr（不推荐） 或 sealed class + record）
 * [ ] DDD
+* [ ] 分区表
 * [x] 代码即文档（https://codewiki.google/）
   * https://deepwiki.com/mengqiang81/latest
+* [ ] 脚本（graalJS）
+* [ ] 规则引擎（Drools）
+* [ ] 流程引擎（camunda）
+* [ ] 国际化（异常信息，术语，规则引擎DSL等等）
+* [ ] 大数据量导出（临时表+游标优化分页查询，缓存防并发，explain估算量级）
+* [ ] 多维分析（Kylin+MDX，存储考虑doris而非hbase）
+* [ ] 通用starter（如i18n）
 
 ## 分层架构
 ### 原则
@@ -50,29 +58,80 @@
     * 每个东西的入口点都应该由相应业务域的团队去维护，他可以选择使用不同的基础设施，但是职责不在基础设施团队（平台服务化）
 
 ### 架构图
-* 接入层（presentation）
-    * grpc组件（grpc）
-    * http组件（http）
-    * 进程内调用组件（intra-process）
-    * 事件处理组件（event）
-        * 定时任务属于对时间事件的处理
-    * MQTT组件
-    * Webhook组件
-* 编排层（orchestration）
-    * 比如任务调度组件对时间事件的处理，map-reduce逻辑中可以调用query查询，command执行逻辑，上报进度等
-    * 事件处理中，也可以编排query和command
-    * 这一层目前还是比较薄，但是以上两条职责实在找不到地方去放
-* 业务层
-    * command组件（application）
-        * 设计之初就走主库
-    * query组件（query）
-        * 设计之初就走从库
-* 领域层（domain）
-* 基础设施层
-    * 基础设施（infrastructure）
-    * 应用配置（starter）
-    * 依赖管理（dependency-management）
-* 二方包（common）
+
+[//]: # (```plantuml)
+
+[//]: # (@startuml)
+
+[//]: # (!include ./docs/architecture.puml)
+
+[//]: # (@enduml)
+
+[//]: # (```)
+```mermaid
+---
+config:
+  flowchart:
+    htmlLabels: false
+---
+flowchart TD
+    %% 因为布局的复杂度，文本画图对于note注释很不友好
+
+    %% ========== 接入层（presentation） ==========
+    subgraph presentationLayer["接入层（presentation）"]
+        rpc("`rpc组件（rpc）
+        _grpc等_`")
+        http("http组件（http）")
+        intraProcess("`进程内调用组件（intra-process）
+        _模块化单体的内部调用走这里_`")
+        event("`事件处理组件（event）
+        _定时任务可以看作对于时间事件的处理_`")
+        mqtt("MQTT组件")
+        webhook("Webhook组件")
+
+        %% %% 接入层组件注释（底部注释）
+        %% rpc --- rpcNote
+        %% linkStyle 0 stroke-width:0px;
+        %% intraProcess -.-> intraProcessNote
+        %% event -.-> eventNote
+    end
+
+    %% ========== 业务层（application） ==========
+    subgraph applicationLayer["业务层（application）"]
+        command("`command组件（application）
+        _设计之初就走主库_`")
+        query("`query组件（query）
+        _设计之初就走从库_`")
+        orchestration("`编排组件（orchestration）
+        _1. 任务调度map-reduce逻辑中可调用query查询、command执行逻辑、上报进度等
+        2. 事件处理中，也可编排query和command_`")
+        %% 业务层组件注释（右侧注释）
+        orchestration --> command
+        orchestration --> query
+    end
+
+    %% ========== 领域层（domain） ==========
+    subgraph domainLayer["领域层（domain）"]
+        domain("领域层（domain）")
+    end
+    %% ========== 基础设施层（infrastructure） ==========
+    subgraph infrastructureLayer["基础设施层（infrastructure）"]
+        infra("基础设施（infrastructure）")
+        starter("应用配置（starter）")
+        dependency("依赖管理（dependency-management）")
+    end
+
+    %% ========== 二方包（common） ==========
+    subgraph commonLayer["二方包（common）"]
+        domainFoundation("domain-foundation")
+    end
+
+    %% 层级依赖关系（自上而下，匹配原PlantUML的依赖逻辑）
+    presentationLayer --> applicationLayer
+    applicationLayer --> domainLayer
+    infrastructureLayer --> domainLayer
+    domainLayer --> domainFoundation
+```
 
 ## Quick Start
 * 执行 common下domain-fundation的publishToMavenLocal

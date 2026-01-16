@@ -1,4 +1,4 @@
-package org.nofdev.core;
+package org.nofdev.stereotype;
 
 /**
  * TODO 草稿态

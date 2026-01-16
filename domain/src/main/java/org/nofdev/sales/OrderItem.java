@@ -3,7 +3,7 @@ package org.nofdev.sales;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.nofdev.common.BasicEntityTrace;
-import org.nofdev.core.Entity;
+import org.nofdev.stereotype.Entity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

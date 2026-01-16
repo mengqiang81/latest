@@ -15,6 +15,8 @@ dependencies {
     // ========分层架构依赖，不得随意修改========
     implementation project(":domain")
     implementation project(":application")
+    // XXX query也依赖倒置，不知是否可行
+//    implementation project(":query")
     // ========分层架构依赖结束========
     implementation 'io.dapr.spring:dapr-spring-boot-starter'
     implementation 'org.mapstruct:mapstruct'

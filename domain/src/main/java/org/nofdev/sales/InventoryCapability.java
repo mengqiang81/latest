@@ -1,6 +1,6 @@
 package org.nofdev.sales;
 
-import org.nofdev.core.DomainSpi;
+import org.nofdev.stereotype.DomainSpi;
 
 /**
  * 库存操作SPI

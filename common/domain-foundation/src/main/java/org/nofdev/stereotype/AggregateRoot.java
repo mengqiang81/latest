@@ -1,4 +1,4 @@
-package org.nofdev.core;
+package org.nofdev.stereotype;
 
 /**
  * 聚合根

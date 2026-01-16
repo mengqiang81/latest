@@ -2,7 +2,7 @@ package org.nofdev.customer;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.nofdev.core.ValueObject;
+import org.nofdev.stereotype.ValueObject;
 
 /**
  * 基础客户信息，可冗余

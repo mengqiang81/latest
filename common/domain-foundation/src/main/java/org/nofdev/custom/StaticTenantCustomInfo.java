@@ -1,7 +1,7 @@
 package org.nofdev.custom;
 
 import jakarta.validation.constraints.Size;
-import org.nofdev.core.ValueObject;
+import org.nofdev.stereotype.ValueObject;
 
 /**
  * 静态租户自定义信息（主要是静态自定义字段），支持检索

@@ -15,7 +15,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // ========分层架构依赖，不得随意修改========
-    implementation project(":infrastructure")
+//    // XXX query也依赖倒置，不知是否可行
+//    implementation project(":infrastructure")
     // ========分层架构依赖结束========
 }
 

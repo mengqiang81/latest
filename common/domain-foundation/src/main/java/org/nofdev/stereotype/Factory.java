@@ -1,4 +1,4 @@
-package org.nofdev.core;
+package org.nofdev.stereotype;
 
 /**
  * 为了保障领域对象创建即合法，可以在factory中进行校验

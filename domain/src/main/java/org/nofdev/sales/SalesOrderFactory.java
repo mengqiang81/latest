@@ -1,12 +1,12 @@
 package org.nofdev.sales;
 
-import org.nofdev.core.Factory;
+import org.nofdev.stereotype.Factory;
 
 public class SalesOrderFactory implements Factory {
-    SalesOrder build(OrderCreateCommand orderCreateCommand) {
+    SalesOrder build(OrderCreateParam orderCreateParam) {
 //        SalesOrder salesOrder = new SalesOrder();
 //        salesOrder.setId(UUID.randomUUID().toString());
-//        salesOrder.setOrderDetails(List.copyOf(orderCreateCommand.orderItems()));
+//        salesOrder.setOrderDetails(List.copyOf(orderCreateParam.orderItems()));
 //        //XXX validate，只在factory执行validate
         return null;
     }

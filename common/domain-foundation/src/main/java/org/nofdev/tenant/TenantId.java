@@ -1,6 +1,6 @@
 package org.nofdev.tenant;
 
-import org.nofdev.core.ValueObject;
+import org.nofdev.stereotype.ValueObject;
 
 /**
  * 在多租户架构中，租户值对象应该全公司共享，所以强制定义了租户编码，而其他地方虽然也推荐用编码，但是不强制。
